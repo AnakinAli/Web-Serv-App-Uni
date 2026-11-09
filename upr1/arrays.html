@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Работа с масиви</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 720px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        input, button {
+            margin: 5px;
+            padding: 8px;
+        }
+
+        #arrayContent {
+            display: block;
+            min-height: 24px;
+            margin-top: 10px;
+            padding: 12px;
+            border: 1px solid #999;
+            background: #f5f5f5;
+        }
+    </style>
+    <script>
+        var values = [];
+
+        function getValue() {
+            return document.getElementById("valueInput").value;
+        }
+
+        function showArray() {
+            document.getElementById("arrayContent").textContent = values.toString();
+        }
+
+        function addRight() {
+            values.push(getValue());
+            showArray();
+        }
+
+        function addLeft() {
+            values.unshift(getValue());
+            showArray();
+        }
+
+        function removeFirst() {
+            values.shift();
+            showArray();
+        }
+
+        function removeLast() {
+            values.pop();
+            showArray();
+        }
+
+        function editCell() {
+            const indexText = document.getElementById("indexInput").value;
+            const index = Number(indexText);
+
+            if (indexText.trim() === "" || !Number.isInteger(index) || index < 0 || index >= values.length) {
+                alert("Въведете валиден индекс от 0 до " + (values.length - 1) + ".");
+                return;
+            }
+
+            values[index] = getValue();
+            showArray();
+        }
+    </script>
+</head>
+<body>
+    <h1>Работа с едномерен масив</h1>
+
+    <label for="valueInput">Стойност:</label>
+    <input type="text" id="valueInput">
+
+    <div>
+        <button id="addRightButton" onclick="addRight()">Добави отдясно</button>
+        <button id="addLeftButton" onclick="addLeft()">Добави отляво</button>
+        <button id="removeFirstButton" onclick="removeFirst()">Изтрий първата стойност</button>
+        <button id="removeLastButton" onclick="removeLast()">Изтрий последната стойност</button>
+    </div>
+
+    <div>
+        <label for="indexInput">Индекс:</label>
+        <input type="text" id="indexInput">
+        <button id="editButton" onclick="editCell()">Редактирай клетката</button>
+    </div>
+
+    <p>Съдържание на масива:</p>
+    <span id="arrayContent"></span>
+</body>
+</html>

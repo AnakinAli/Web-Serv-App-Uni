@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Упражнение 4 – Модули и пароли</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Генератор на пароли</a>
+        <a href="users.html">Fetch API и потребители</a>
+    </nav>
+
+    <h1>Модули: генератор на пароли</h1>
+    <section class="panel">
+        <label><input type="radio" name="passwordType" value="digits" checked> Само цифри</label>
+        <label><input type="radio" name="passwordType" value="letters"> Само букви</label>
+        <button id="generateButton">Генерирай парола</button>
+        <p class="muted">Дължината на всяка парола се избира произволно между 3 и 20 символа.</p>
+    </section>
+
+    <section class="panel">
+        <h2>Генерирани пароли</h2>
+        <div id="passwordList"><p class="muted">Все още няма генерирани пароли.</p></div>
+    </section>
+
+    <script type="module">
+        import { generatePassord, passwordStrength } from "./passwordTools.js";
+
+        window.generatePassord = generatePassord;
+        window.passwordStrength = passwordStrength;
+
+        const passwords = [];
+
+        function renderPasswords() {
+            const list = document.getElementById("passwordList");
+
+            if (passwords.length === 0) {
+                list.innerHTML = '<p class="muted">Все още няма генерирани пароли.</p>';
+                return;
+            }
+
+            list.innerHTML = passwords.map(function (item, index) {
+                let strengthHtml = "";
+
+                if (item.strength === 0) {
+                    strengthHtml = '<span class="strength weak">слаба</span>';
+                } else if (item.strength === 1) {
+                    strengthHtml = '<span class="strength medium">добра</span>';
+                } else if (item.strength === 2) {
+                    strengthHtml = '<span class="strength strong">силна</span>';
+                }
+
+                return `
+                    <div class="password-row">
+                        <span class="password-value">${item.password.toString()}</span>
+                        <span>${item.password.getType()}</span>
+                        <button type="button" onclick="checkStrength(${index})">Колко е Сигурна</button>
+                        ${strengthHtml}
+                    </div>
+                `;
+            }).join("");
+        }
+
+        window.checkStrength = function (index) {
+            passwords[index].strength = passwordStrength(passwords[index].password);
+            renderPasswords();
+        };
+
+        document.getElementById("generateButton").addEventListener("click", function () {
+            const type = document.querySelector('input[name="passwordType"]:checked').value;
+            const randomLength = Math.floor(Math.random() * 18) + 3;
+            const password = generatePassord(randomLength, type);
+            passwords.push({ password, strength: null });
+            password.print();
+            renderPasswords();
+        });
+    </script>
+</body>
+</html>

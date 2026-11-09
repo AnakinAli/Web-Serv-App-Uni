@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визуализиране на данни</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 760px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        input, button {
+            margin: 5px;
+            padding: 8px;
+        }
+
+        #dataContent {
+            min-height: 24px;
+            padding: 10px;
+            border: 1px solid #999;
+            background: #f5f5f5;
+        }
+
+        #figure {
+            display: block;
+            width: 100%;
+            max-width: 700px;
+            height: 350px;
+            margin-top: 20px;
+            border: 1px solid #333;
+            background: white;
+        }
+    </style>
+    <script>
+        var points = [];
+
+        function addData() {
+            const scoreInput = document.getElementById("scoreInput");
+            const colorInput = document.getElementById("colorInput");
+            const score = Number(scoreInput.value);
+            const color = colorInput.value.trim();
+
+            if (scoreInput.value.trim() === "" || !Number.isFinite(score) || score < 0) {
+                alert("Въведете валиден неотрицателен брой точки.");
+                return;
+            }
+
+            if (color === "") {
+                alert("Въведете цвят.");
+                return;
+            }
+
+            points.push([score, color]);
+            showData();
+        }
+
+        function showData() {
+            const text = points
+                .map(function (item, index) {
+                    return "Потребител " + (index + 1) + ": " + item[0] + " точки, цвят " + item[1];
+                })
+                .join(" | ");
+
+            document.getElementById("dataContent").textContent = text;
+        }
+
+        function createSvgElement(name) {
+            return document.createElementNS("http://www.w3.org/2000/svg", name);
+        }
+
+        function draw() {
+            const figure = document.getElementById("figure");
+            figure.replaceChildren();
+
+            if (points.length === 0) {
+                alert("Първо добавете данни.");
+                return;
+            }
+
+            const chartWidth = 700;
+            const chartHeight = 350;
+            const padding = 40;
+            const availableHeight = chartHeight - padding * 2;
+            const maximum = Math.max.apply(null, points.map(function (item) { return item[0]; })) || 1;
+            const slotWidth = (chartWidth - padding * 2) / points.length;
+            const barWidth = Math.min(70, slotWidth * 0.65);
+
+            points.forEach(function (item, index) {
+                const barHeight = item[0] / maximum * availableHeight;
+                const x = padding + index * slotWidth + (slotWidth - barWidth) / 2;
+                const y = chartHeight - padding - barHeight;
+
+                const rectangle = createSvgElement("rect");
+                rectangle.setAttribute("x", x);
+                rectangle.setAttribute("y", y);
+                rectangle.setAttribute("width", barWidth);
+                rectangle.setAttribute("height", barHeight);
+                rectangle.setAttribute("fill", item[1]);
+                figure.appendChild(rectangle);
+
+                const scoreLabel = createSvgElement("text");
+                scoreLabel.setAttribute("x", x + barWidth / 2);
+                scoreLabel.setAttribute("y", Math.max(18, y - 7));
+                scoreLabel.setAttribute("text-anchor", "middle");
+                scoreLabel.textContent = item[0];
+                figure.appendChild(scoreLabel);
+
+                const userLabel = createSvgElement("text");
+                userLabel.setAttribute("x", x + barWidth / 2);
+                userLabel.setAttribute("y", chartHeight - 15);
+                userLabel.setAttribute("text-anchor", "middle");
+                userLabel.textContent = "П" + (index + 1);
+                figure.appendChild(userLabel);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Визуализиране на точки</h1>
+
+    <label for="scoreInput">Брой точки:</label>
+    <input type="text" id="scoreInput">
+
+    <label for="colorInput">Цвят:</label>
+    <input type="text" id="colorInput" placeholder="напр. blue или #aaff00">
+
+    <button id="addButton" onclick="addData()">Добави</button>
+
+    <p>Въведени данни:</p>
+    <div id="dataContent"></div>
+
+    <button id="drawButton" onclick="draw()">Нарисувай</button>
+
+    <svg width="700" height="350" viewBox="0 0 700 350"
+         xmlns="http://www.w3.org/2000/svg" id="figure"></svg>
+</body>
+</html>

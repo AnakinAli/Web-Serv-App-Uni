@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 1 – Йерархия от типове</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="zad1.js"></script>
+</head>
+<body>
+    <nav><a href="index.html">Начало</a> <a href="zad2.html">Задача 2</a></nav>
+    <h1>Задача 1: Йерархия от типове</h1>
+    <div class="panel">
+        <p>Отворете конзолата на браузъра, за да видите резултатите от методите.</p>
+        <button onclick="showExamples()">Създай примерни обекти</button>
+        <div id="result" class="result">Натиснете бутона.</div>
+    </div>
+
+    <script>
+        function showExamples() {
+            const person = new Person("Иван");
+            person.age = 35;
+            person.gender = "мъж";
+
+            const employee = new Employee("Мария");
+            employee.age = 29;
+            employee.gender = "жена";
+            employee.jobTitle = "програмист";
+            employee.salary = 3200;
+            employee.department = "Разработка";
+
+            const student = new Student("Георги");
+            student.age = 21;
+            student.gender = "мъж";
+            student.university = "Софийски университет";
+            student.faculty = "ФМИ";
+            student.major = "Информатика";
+
+            const messages = [
+                person.introduce(),
+                employee.introduce(),
+                employee.work(),
+                student.introduce(),
+                student.study()
+            ];
+
+            document.getElementById("result").textContent = messages.join("\n");
+        }
+    </script>
+</body>
+</html>

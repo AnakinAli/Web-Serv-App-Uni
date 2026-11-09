@@ -1,0 +1,18 @@
+{
+  "name": "upr10-mongodb-express",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start-express": "nodemon start-express-with-mongodb.js",
+    "start": "node start-express-with-mongodb.js",
+    "test:integration": "node integration-test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "mongodb": "^7.8.0",
+    "mongoose": "^9.12.0",
+    "nodemon": "^3.1.11"
+  }
+}

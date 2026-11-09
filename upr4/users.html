@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Упражнение 4 – Fetch API</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Генератор на пароли</a>
+        <a href="users.html">Fetch API и потребители</a>
+    </nav>
+
+    <h1>Работа с масиви и Fetch API</h1>
+    <section class="panel">
+        <button onclick="loadData()">Зареди data.json</button>
+        <button onclick="showAll()">Покажи всички</button>
+        <button onclick="filterPeople('student')">Само студенти</button>
+        <button onclick="filterPeople('employee')">Само служители</button>
+        <div id="peopleOutput"><p class="muted">Данните все още не са заредени.</p></div>
+    </section>
+
+    <section class="panel">
+        <h2>Добавяне на нов обект</h2>
+        <form id="personForm">
+            <div class="form-grid">
+                <label>Тип
+                    <select id="typeInput" onchange="updateSalaryField()">
+                        <option value="student">Студент</option>
+                        <option value="employee">Служител</option>
+                    </select>
+                </label>
+                <label>Име
+                    <input type="text" id="nameInput" required>
+                </label>
+                <label>Рождена дата
+                    <input type="text" id="birthDateInput" placeholder="ДД.ММ.ГГГГ" required>
+                </label>
+                <label>Специалност / отдел
+                    <input type="text" id="majorDeptInput" required>
+                </label>
+                <label>Заплата
+                    <input type="number" id="salaryInput" min="0" disabled>
+                </label>
+            </div>
+            <button type="submit">Добави</button>
+        </form>
+        <div id="message">Попълнете полетата, за да добавите нов потребител.</div>
+    </section>
+
+    <script>
+        let people = [];
+
+        function formatPerson(person) {
+            const type = person.type === "student" ? "Студент" : "Служител";
+            const salary = person.type === "employee" ? `, заплата: ${person.salary} лв.` : "";
+            return `${type}: ${person.name}, рождена дата: ${person.birthDate}, специалност/отдел: ${person.majorDept}${salary}`;
+        }
+
+        function renderPeople(data, title) {
+            const output = document.getElementById("peopleOutput");
+            const rows = data.map(function (person) {
+                return `<div class="person-row">${formatPerson(person)}</div>`;
+            }).join("");
+            output.innerHTML = `<h2>${title}</h2>${rows || '<p class="muted">Няма намерени записи.</p>'}`;
+        }
+
+        async function loadData() {
+            const message = document.getElementById("message");
+
+            try {
+                const response = await fetch("data.json");
+                if (!response.ok) {
+                    throw new Error(`HTTP грешка ${response.status}`);
+                }
+
+                people = await response.json();
+                renderPeople(people, "Всички потребители");
+                message.className = "";
+                message.textContent = "Данните са заредени успешно чрез fetch() и Response.json().";
+            } catch (error) {
+                console.error(error);
+                message.className = "error";
+                message.textContent = "Грешка при зареждането. Отворете страницата чрез локален уеб сървър.";
+            }
+        }
+
+        function showAll() {
+            renderPeople(people, "Всички потребители");
+        }
+
+        function filterPeople(type) {
+            const filtered = people.filter(function (person) {
+                return person.type === type;
+            });
+            renderPeople(filtered, type === "student" ? "Студенти" : "Служители");
+        }
+
+        function updateSalaryField() {
+            const employeeSelected = document.getElementById("typeInput").value === "employee";
+            const salaryInput = document.getElementById("salaryInput");
+            salaryInput.disabled = !employeeSelected;
+            salaryInput.required = employeeSelected;
+
+            if (!employeeSelected) {
+                salaryInput.value = "";
+            }
+        }
+
+        document.getElementById("personForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const type = document.getElementById("typeInput").value;
+            const person = {
+                type: type,
+                name: document.getElementById("nameInput").value.trim(),
+                birthDate: document.getElementById("birthDateInput").value.trim(),
+                majorDept: document.getElementById("majorDeptInput").value.trim()
+            };
+
+            if (type === "employee") {
+                person.salary = Number(document.getElementById("salaryInput").value);
+            }
+
+            people.push(person);
+            renderPeople(people, "Всички потребители след добавянето");
+            event.target.reset();
+            updateSalaryField();
+            document.getElementById("message").textContent = "Новият обект е добавен към масива.";
+        });
+
+        updateSalaryField();
+    </script>
+</body>
+</html>

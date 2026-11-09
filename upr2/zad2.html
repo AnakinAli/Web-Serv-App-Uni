@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 2 – Хора</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="zad1.js"></script>
+</head>
+<body>
+    <nav><a href="index.html">Начало</a> <a href="zad1.html">Задача 1</a></nav>
+    <h1>Задача 2: Служители и студенти</h1>
+
+    <div class="panel">
+        <label for="nameInput">Име:</label>
+        <input type="text" id="nameInput" placeholder="Въведете име">
+
+        <label><input type="radio" name="personType" value="employee" checked> Служител</label>
+        <label><input type="radio" name="personType" value="student"> Студент</label>
+
+        <div>
+            <button onclick="addPerson()">Добави човек</button>
+            <button onclick="printNamePercentages()">Процент на имената</button>
+        </div>
+    </div>
+
+    <h2>Добавени хора</h2>
+    <ul id="peopleList"><li class="muted">Все още няма добавени хора.</li></ul>
+    <div id="result" class="result">Резултатите се показват тук и в конзолата.</div>
+
+    <script>
+        const people = [];
+
+        function addPerson() {
+            const input = document.getElementById("nameInput");
+            const name = input.value.trim();
+            const selectedType = document.querySelector('input[name="personType"]:checked').value;
+
+            if (name === "") {
+                alert("Моля, въведете име.");
+                input.focus();
+                return;
+            }
+
+            const person = selectedType === "employee"
+                ? new Employee(name)
+                : new Student(name);
+
+            people.push(person);
+            input.value = "";
+            renderPeople();
+            console.log("Добавен обект:", person);
+        }
+
+        function renderPeople() {
+            const list = document.getElementById("peopleList");
+            list.replaceChildren();
+
+            people.forEach(function (person) {
+                const item = document.createElement("li");
+                const type = person instanceof Employee ? "служител" : "студент";
+                item.textContent = `${person.name} – ${type}`;
+                list.appendChild(item);
+            });
+        }
+
+        function printNamePercentages() {
+            if (people.length === 0) {
+                alert("Първо добавете поне един човек.");
+                return;
+            }
+
+            const uniqueNames = new Set(people.map(function (person) {
+                return person.name;
+            }));
+            const lines = [];
+
+            uniqueNames.forEach(function (name) {
+                const count = people.filter(function (person) {
+                    return person.name === name;
+                }).length;
+                const percentage = count / people.length * 100;
+                const message = `${name}: ${percentage.toFixed(2)}% (${count} от ${people.length})`;
+                console.log(message);
+                lines.push(message);
+            });
+
+            document.getElementById("result").textContent = lines.join("\n");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+services:
+  react:
+    image: node:26-alpine
+    user: "1000:1000"
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    ports:
+      - "5173:5173"
+    command: npm run dev --prefix react-app -- --host 0.0.0.0

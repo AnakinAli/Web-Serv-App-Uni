@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калкулатор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        input, button {
+            margin: 5px;
+            padding: 8px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function getNumbers() {
+            return {
+                a: +document.getElementById("textField1").value,
+                b: +document.getElementById("textField2").value
+            };
+        }
+
+        function showResult(value) {
+            document.getElementById("result").textContent = value;
+        }
+
+        function sum() {
+            const { a, b } = getNumbers();
+            showResult(a + b);
+        }
+
+        function subtract() {
+            const { a, b } = getNumbers();
+            showResult(a - b);
+        }
+
+        function multiply() {
+            const { a, b } = getNumbers();
+            showResult(a * b);
+        }
+
+        function divide() {
+            const { a, b } = getNumbers();
+            showResult(b === 0 ? "Не може да се дели на нула!" : a / b);
+        }
+
+        function power() {
+            const { a, b } = getNumbers();
+            showResult(a ** b);
+        }
+
+        function squareRoot() {
+            const { a } = getNumbers();
+            showResult(a < 0 ? "Няма реален квадратен корен!" : Math.sqrt(a));
+        }
+    </script>
+</head>
+<body>
+    <h1>Калкулатор</h1>
+
+    <label for="textField1">Първо число:</label>
+    <input type="text" id="textField1">
+
+    <label for="textField2">Второ число:</label>
+    <input type="text" id="textField2">
+
+    <div>
+        <button id="sumButton" onclick="sum()">Събиране (+)</button>
+        <button id="subtractButton" onclick="subtract()">Изваждане (-)</button>
+        <button id="multiplyButton" onclick="multiply()">Умножение (×)</button>
+        <button id="divideButton" onclick="divide()">Деление (÷)</button>
+        <button id="powerButton" onclick="power()">Степен</button>
+        <button id="squareRootButton" onclick="squareRoot()">Квадратен корен на първото число</button>
+    </div>
+
+    <p class="result">Резултат: <span id="result"></span></p>
+</body>
+</html>

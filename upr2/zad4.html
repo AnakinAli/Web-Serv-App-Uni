@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 4 – Библиотека</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav><a href="index.html">Начало</a></nav>
+    <h1>Задача 4: Управление на библиотека</h1>
+
+    <div class="panel actions">
+        <button onclick="showAvailableTitles()">Налични книги</button>
+        <button onclick="showClassics()">Класически книги</button>
+        <button onclick="showCurrentlyBorrowed()">Книги с незавършен заем</button>
+        <button onclick="showMostBorrowed()">Най-заемана книга</button>
+        <button onclick="showAvailableCopies()">Общо налични екземпляри</button>
+        <button onclick="showBorrowedInSeptember()">Заемани през септември 2023 г.</button>
+        <button onclick="showTopUser()">Потребител с най-много различни книги</button>
+    </div>
+
+    <div id="result" class="result">Изберете действие.</div>
+
+    <script>
+        const library = [
+            {
+                id: 1,
+                title: "The Great Gatsby",
+                author: "F. Scott Fitzgerald",
+                genres: ["Fiction", "Classics"],
+                copies: [{ id: 101, isAvailable: false }, { id: 102, isAvailable: true }],
+                borrowedHistory: [
+                    { userId: 1, dateBorrowed: "2023-09-01", dateReturned: "2023-09-20" },
+                    { userId: 2, dateBorrowed: "2023-09-25", dateReturned: null }
+                ]
+            },
+            {
+                id: 2,
+                title: "1984",
+                author: "George Orwell",
+                genres: ["Fiction", "Dystopian"],
+                copies: [{ id: 201, isAvailable: true }],
+                borrowedHistory: []
+            },
+            {
+                id: 3,
+                title: "To Kill a Mockingbird",
+                author: "Harper Lee",
+                genres: ["Fiction", "Classics"],
+                copies: [{ id: 301, isAvailable: false }],
+                borrowedHistory: [
+                    { userId: 3, dateBorrowed: "2023-09-15", dateReturned: null }
+                ]
+            }
+        ];
+
+        function display(title, value) {
+            const text = Array.isArray(value) ? value.join("\n") : String(value);
+            document.getElementById("result").textContent = `${title}\n${text || "Няма намерени резултати."}`;
+            console.log(title, value);
+        }
+
+        function showAvailableTitles() {
+            const titles = library
+                .filter(function (book) {
+                    return book.copies.some(function (copy) { return copy.isAvailable; });
+                })
+                .map(function (book) { return book.title; });
+            display("Заглавия, налични за заемане:", titles);
+        }
+
+        function showClassics() {
+            const books = library
+                .filter(function (book) { return book.genres.includes("Classics"); })
+                .map(function (book) { return `${book.title} – ${book.author}`; });
+            display("Книги в жанр Classics:", books);
+        }
+
+        function showCurrentlyBorrowed() {
+            const books = library
+                .filter(function (book) {
+                    return book.borrowedHistory.some(function (record) { return record.dateReturned === null; });
+                })
+                .map(function (book) { return book.title; });
+            display("Книги с поне един незавършен заем:", books);
+        }
+
+        function showMostBorrowed() {
+            const book = library.reduce(function (current, candidate) {
+                return candidate.borrowedHistory.length > current.borrowedHistory.length ? candidate : current;
+            });
+            display("Книга с най-много заеми:", `${book.title} – ${book.borrowedHistory.length} заема`);
+        }
+
+        function showAvailableCopies() {
+            const total = library.reduce(function (sum, book) {
+                const available = book.copies.filter(function (copy) { return copy.isAvailable; }).length;
+                return sum + available;
+            }, 0);
+            display("Общ брой налични екземпляри:", total);
+        }
+
+        function showBorrowedInSeptember() {
+            const start = new Date("2023-09-01T00:00:00");
+            const end = new Date("2023-10-01T00:00:00");
+            const books = library
+                .filter(function (book) {
+                    return book.borrowedHistory.some(function (record) {
+                        const borrowedDate = new Date(record.dateBorrowed + "T00:00:00");
+                        return borrowedDate >= start && borrowedDate < end;
+                    });
+                })
+                .map(function (book) { return book.title; });
+            display("Книги, заемани през септември 2023 г.:", books);
+        }
+
+        function showTopUser() {
+            const booksByUser = new Map();
+
+            library.forEach(function (book) {
+                book.borrowedHistory.forEach(function (record) {
+                    if (!booksByUser.has(record.userId)) {
+                        booksByUser.set(record.userId, new Set());
+                    }
+                    booksByUser.get(record.userId).add(book.id);
+                });
+            });
+
+            if (booksByUser.size === 0) {
+                display("Потребител с най-много различни книги:", "Няма история на заеманията.");
+                return;
+            }
+
+            let topUserId = null;
+            let maximum = -1;
+            booksByUser.forEach(function (bookIds, userId) {
+                if (bookIds.size > maximum) {
+                    topUserId = userId;
+                    maximum = bookIds.size;
+                }
+            });
+
+            display("Потребител с най-много различни книги:", `userId ${topUserId} – ${maximum} различни книги`);
+        }
+    </script>
+</body>
+</html>

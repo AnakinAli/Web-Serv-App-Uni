@@ -1,0 +1,22 @@
+services:
+  client:
+    image: node:26-alpine
+    user: "1000:1000"
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    ports:
+      - "5174:5174"
+    command: npm run dev --prefix react-app -- --host 0.0.0.0 --port 5174
+
+  api:
+    image: node:26-alpine
+    user: "1000:1000"
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    ports:
+      - "3001:3001"
+    environment:
+      DOTENV_KEY: "${DOTENV_KEY:-}"
+    command: npm run server

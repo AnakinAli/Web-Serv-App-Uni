@@ -1,0 +1,12 @@
+services:
+  client:
+    image: node:26-alpine
+    user: "1000:1000"
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    ports:
+      - "5177:5177"
+    environment:
+      VITE_WEATHER_API_KEY: "${VITE_WEATHER_API_KEY:-}"
+    command: npm run dev --prefix react-app -- --host 0.0.0.0 --port 5177

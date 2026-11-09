@@ -1,0 +1,206 @@
+{
+  "destinations": [
+    {
+      "id": 1,
+      "name": "Айфеловата кула",
+      "city": "Париж",
+      "country": "Франция",
+      "type": "Забележителност",
+      "description": "Един от най-разпознаваемите символи на Европа. Разходете се по бреговете на Сена, разгледайте панорамата на Париж и се насладете на вечерното осветление на кулата.",
+      "imageUrl": "/images/eiffel.svg",
+      "gallery": [
+        "/images/eiffel.svg",
+        "/images/eiffel-detail.svg",
+        "/images/eiffel-sunset.svg"
+      ],
+      "rating": 4.8,
+      "estimatedBudget": 240
+    },
+    {
+      "id": 2,
+      "name": "Колизеумът",
+      "city": "Рим",
+      "country": "Италия",
+      "type": "История",
+      "description": "Античният амфитеатър разказва историята на Римската империя. Посетете и близкия Римски форум за пълно потапяне в историята.",
+      "imageUrl": "/images/colosseum.svg",
+      "gallery": [
+        "/images/colosseum.svg",
+        "/images/colosseum-detail.svg",
+        "/images/colosseum-sunset.svg"
+      ],
+      "rating": 4.7,
+      "estimatedBudget": 180
+    },
+    {
+      "id": 3,
+      "name": "Санторини",
+      "city": "Ия",
+      "country": "Гърция",
+      "type": "Природа",
+      "description": "Белосани къщи, лазурно море и незабравими залези. Разходете се по тесните улички на Ия и открийте гледките към калдерата.",
+      "imageUrl": "/images/santorini.svg",
+      "gallery": [
+        "/images/santorini.svg",
+        "/images/santorini-detail.svg",
+        "/images/santorini-sunset.svg"
+      ],
+      "rating": 4.9,
+      "estimatedBudget": 195
+    },
+    {
+      "id": 4,
+      "name": "Фушими Инари",
+      "city": "Киото",
+      "country": "Япония",
+      "type": "Култура",
+      "description": "Пътеки през хиляди червени тории водят към свещена планина. Едно от най-впечатляващите места за разходка в Киото.",
+      "imageUrl": "/images/kyoto.svg",
+      "gallery": [
+        "/images/kyoto.svg",
+        "/images/kyoto-detail.svg",
+        "/images/kyoto-sunset.svg"
+      ],
+      "rating": 4.8,
+      "estimatedBudget": 300
+    },
+    {
+      "id": 5,
+      "name": "Саграда Фамилия",
+      "city": "Барселона",
+      "country": "Испания",
+      "type": "Архитектура",
+      "description": "Уникалната базилика на Антони Гауди впечатлява с органични форми, детайли и цветна светлина, проникваща през витражите.",
+      "imageUrl": "/images/barcelona.svg",
+      "gallery": [
+        "/images/barcelona.svg",
+        "/images/barcelona-detail.svg",
+        "/images/barcelona-sunset.svg"
+      ],
+      "rating": 4.6,
+      "estimatedBudget": 170
+    },
+    {
+      "id": 6,
+      "name": "Кападокия",
+      "city": "Гьореме",
+      "country": "Турция",
+      "type": "Природа",
+      "description": "Магически скални образувания, подземни градове и топловъздушни балони над долините при изгрев.",
+      "imageUrl": "/images/cappadocia.svg",
+      "gallery": [
+        "/images/cappadocia.svg",
+        "/images/cappadocia-detail.svg",
+        "/images/cappadocia-sunset.svg"
+      ],
+      "rating": 4.9,
+      "estimatedBudget": 220
+    },
+    {
+      "id": 7,
+      "name": "Рилски манастир",
+      "city": "Рила",
+      "country": "България",
+      "type": "Култура",
+      "description": "Български духовен и архитектурен символ сред планински пейзаж. Разгледайте стенописите и разходете се из красивата Рила.",
+      "imageUrl": "/images/rila.svg",
+      "gallery": [
+        "/images/rila.svg",
+        "/images/rila-detail.svg",
+        "/images/rila-sunset.svg"
+      ],
+      "rating": 4.7,
+      "estimatedBudget": 125
+    },
+    {
+      "id": 8,
+      "name": "Ню Йорк",
+      "city": "Ню Йорк",
+      "country": "САЩ",
+      "type": "Град",
+      "description": "Градът, който никога не спи — небостъргачи, културни квартали, световни музеи и оживени улици.",
+      "imageUrl": "/images/newyork.svg",
+      "gallery": [
+        "/images/newyork.svg",
+        "/images/newyork-detail.svg",
+        "/images/newyork-sunset.svg"
+      ],
+      "rating": 4.4,
+      "estimatedBudget": 290
+    },
+    {
+      "id": 9,
+      "name": "Мачу Пикчу",
+      "city": "Куско",
+      "country": "Перу",
+      "type": "История",
+      "description": "Древният град на инките е разположен високо сред Андите и предлага спиращи дъха гледки и невероятно усещане за миналото.",
+      "imageUrl": "/images/machu.svg",
+      "gallery": [
+        "/images/machu.svg",
+        "/images/machu-detail.svg",
+        "/images/machu-sunset.svg"
+      ],
+      "rating": 4.9,
+      "estimatedBudget": 340
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "destinationId": 1,
+      "author": "Анна",
+      "text": "Невероятна гледка към града, особено след залез!",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "destinationId": 1,
+      "author": "Мартин",
+      "text": "Вземете билети предварително — спестява много чакане.",
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "destinationId": 2,
+      "author": "Елена",
+      "text": "Усещането да си толкова близо до историята е страхотно.",
+      "rating": 5
+    },
+    {
+      "id": 4,
+      "destinationId": 3,
+      "author": "Иван",
+      "text": "Залезът беше най-красивият момент от пътуването.",
+      "rating": 5
+    },
+    {
+      "id": 5,
+      "destinationId": 4,
+      "author": "Мария",
+      "text": "Тръгнете рано сутрин, преди да се съберат много хора.",
+      "rating": 5
+    },
+    {
+      "id": 6,
+      "destinationId": 7,
+      "author": "Георги",
+      "text": "Впечатляваща архитектура и спокойна атмосфера.",
+      "rating": 5
+    },
+    {
+      "id": 7,
+      "destinationId": 6,
+      "author": "София",
+      "text": "Полетът с балон си заслужава всяка минута.",
+      "rating": 5
+    },
+    {
+      "id": 8,
+      "destinationId": 5,
+      "author": "Николай",
+      "text": "Невероятни детайли отвън и отвътре.",
+      "rating": 4
+    }
+  ]
+}

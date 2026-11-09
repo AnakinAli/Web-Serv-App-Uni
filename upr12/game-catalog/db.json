@@ -1,0 +1,84 @@
+{
+  "games": [
+    {
+      "id": 1,
+      "title": "Neon Drift",
+      "genre": "Състезателна",
+      "year": 2025,
+      "description": "Участвай в високоскоростни нощни състезания в киберпънк мегаполис с неонови писти, тайни маршрути и футуристични автомобили.",
+      "rating": 9.5,
+      "imageUrl": "/images/neon-drift.svg",
+      "developer": "Velocity Labs"
+    },
+    {
+      "id": 2,
+      "title": "Eldergrove",
+      "genre": "RPG",
+      "year": 2024,
+      "description": "Потопи се в мистичен свят на древни гори, забравени магии и легендарни създания. Всяко решение променя историята.",
+      "rating": 9.2,
+      "imageUrl": "/images/eldergrove.svg",
+      "developer": "Moonlit Studio"
+    },
+    {
+      "id": 3,
+      "title": "Starfall Protocol",
+      "genre": "Екшън",
+      "year": 2026,
+      "description": "Командвай елитен екип в космическо приключение с напрегнати мисии, иновативни джаджи и сблъсъци между галактики.",
+      "rating": 9.1,
+      "imageUrl": "/images/starfall.svg",
+      "developer": "Orbital Works"
+    },
+    {
+      "id": 4,
+      "title": "Pixel Forge",
+      "genre": "Пъзел",
+      "year": 2023,
+      "description": "Изграждай собствен свят, решавай хитри логически предизвикателства и отключвай нови инструменти в пикселна вселена.",
+      "rating": 8.7,
+      "imageUrl": "/images/pixel-forge.svg",
+      "developer": "Bitcraft"
+    },
+    {
+      "id": 5,
+      "title": "Ocean Depths",
+      "genre": "Приключенска",
+      "year": 2022,
+      "description": "Изследвай необятните морски дълбини, разкрий тайните на изгубена цивилизация и открий екзотични подводни създания.",
+      "rating": 8.9,
+      "imageUrl": "/images/ocean-depths.svg",
+      "developer": "Blue Horizon"
+    },
+    {
+      "id": 6,
+      "title": "Mythic Realms",
+      "genre": "Стратегия",
+      "year": 2025,
+      "description": "Изгради своето кралство, управлявай ресурси, сключвай съюзи и поведи армията си в епични фентъзи битки.",
+      "rating": 9.4,
+      "imageUrl": "/images/mythic-realms.svg",
+      "developer": "Iron Crown"
+    },
+    {
+      "id": 7,
+      "title": "Circuit Zero",
+      "genre": "Симулация",
+      "year": 2024,
+      "description": "Конструирай и програмирай автономни машини в град на бъдещето, където всяка система се нуждае от твоето решение.",
+      "rating": 8.5,
+      "imageUrl": "/images/circuit-zero.svg",
+      "developer": "Quantum Arcade"
+    },
+    {
+      "id": 8,
+      "title": "Emberborne",
+      "genre": "Екшън",
+      "year": 2021,
+      "description": "Премини през вулканични земи, победи могъщи противници и овладей силата на огъня в динамична приключенска игра.",
+      "rating": 8.8,
+      "imageUrl": "/images/emberborne.svg",
+      "developer": "Firelight Games"
+    }
+  ]
+}

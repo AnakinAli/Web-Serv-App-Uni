@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: #1f2937;
+  background: #f1f5f9;
+  font-family: Arial, sans-serif;
+}
+
+.site-header {
+  padding: 38px 20px;
+  color: white;
+  background: linear-gradient(135deg, #1d4ed8, #4f46e5);
+  text-align: center;
+}
+
+.site-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.site-header p {
+  margin: 0;
+  color: #dbeafe;
+}

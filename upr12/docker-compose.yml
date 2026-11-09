@@ -1,0 +1,64 @@
+services:
+  travel-db:
+    build: ./database
+    command: ["json-server", "--watch", "/data/db.json", "--host", "0.0.0.0", "--port", "3000"]
+    volumes:
+      - ./travel-guide/db.json:/data/db.json
+    ports:
+      - "3002:3000"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/destinations"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  games-db:
+    build: ./database
+    command: ["json-server", "--watch", "/data/db.json", "--host", "0.0.0.0", "--port", "3000"]
+    volumes:
+      - ./game-catalog/db.json:/data/db.json
+    ports:
+      - "3003:3000"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/games"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  travel-guide:
+    build: ./travel-guide
+    environment:
+      JSON_SERVER_URL: http://travel-db:3000
+      NEXT_TELEMETRY_DISABLED: "1"
+      WATCHPACK_POLLING: "true"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./travel-guide:/app
+      - travel_modules:/app/node_modules
+      - travel_next:/app/.next
+    depends_on:
+      travel-db:
+        condition: service_healthy
+
+  game-catalog:
+    build: ./game-catalog
+    environment:
+      JSON_SERVER_URL: http://games-db:3000
+      NEXT_TELEMETRY_DISABLED: "1"
+      WATCHPACK_POLLING: "true"
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./game-catalog:/app
+      - games_modules:/app/node_modules
+      - games_next:/app/.next
+    depends_on:
+      games-db:
+        condition: service_healthy
+
+volumes:
+  travel_modules:
+  travel_next:
+  games_modules:
+  games_next:

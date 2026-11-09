@@ -1,0 +1,48 @@
+{
+  "excursions": [
+    {
+      "id": "1",
+      "title": "Рилските езера",
+      "description": "Еднодневен преход сред седемте ледникови езера в Рила.",
+      "image": "/images/rila.svg",
+      "price": 55,
+      "registeredCount": 0,
+      "maxPeople": 18
+    },
+    {
+      "id": "2",
+      "title": "Старият Пловдив",
+      "description": "Културна разходка из възрожденските къщи и Античния театър.",
+      "image": "/images/plovdiv.svg",
+      "price": 42,
+      "registeredCount": 0,
+      "maxPeople": 25
+    },
+    {
+      "id": "3",
+      "title": "Белоградчишките скали",
+      "description": "Пътуване до природния феномен и крепостта Калето.",
+      "image": "/images/belogradchik.svg",
+      "price": 68,
+      "registeredCount": 0,
+      "maxPeople": 20
+    },
+    {
+      "id": "4",
+      "title": "Несебър и морето",
+      "description": "Уикенд край морето с обиколка на историческия полуостров.",
+      "image": "/images/nesebar.svg",
+      "price": 135,
+      "registeredCount": 0,
+      "maxPeople": 16
+    }
+  ],
+  "registrations": [],
+  "users": [
+    {
+      "id": "1",
+      "userName": "admin",
+      "password": "pass"
+    }
+  ]
+}

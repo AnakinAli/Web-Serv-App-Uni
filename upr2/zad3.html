@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задача 3 – Футболен отбор</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav><a href="index.html">Начало</a></nav>
+    <h1>Задача 3: Управление на футболен отбор</h1>
+
+    <div class="panel actions">
+        <button onclick="showForwards()">Нападатели с поне 10 гола</button>
+        <button onclick="showTotalGoals()">Общо голове</button>
+        <button onclick="showPlayersWithCards()">Над 3 жълти картона</button>
+        <button onclick="showInjuredPlayers()">Контузени играчи</button>
+        <button onclick="showGoalAverage()">Средно голове на мач</button>
+        <button onclick="showMostMissedGames()">Най-много пропуснати мачове</button>
+        <button onclick="showMidfielders()">Подходящи полузащитници</button>
+        <button onclick="showTeamMissedGames()">Общо пропуснати мачове</button>
+    </div>
+
+    <div id="result" class="result">Изберете действие.</div>
+
+    <script>
+        const team = [
+            {
+                id: 1,
+                name: "John Smith",
+                position: "forward",
+                goals: 12,
+                assists: 5,
+                yellowCards: 3,
+                redCards: 1,
+                gamesPlayed: 20,
+                injuries: [{ injuryType: "knee", missedGames: 2, recovered: true }]
+            },
+            {
+                id: 2,
+                name: "Michael Doe",
+                position: "midfielder",
+                goals: 5,
+                assists: 10,
+                yellowCards: 4,
+                redCards: 0,
+                gamesPlayed: 18,
+                injuries: []
+            },
+            {
+                id: 3,
+                name: "Alex Brown",
+                position: "defender",
+                goals: 1,
+                assists: 2,
+                yellowCards: 5,
+                redCards: 1,
+                gamesPlayed: 17,
+                injuries: [{ injuryType: "muscle", missedGames: 5, recovered: false }]
+            }
+        ];
+
+        function display(title, value) {
+            const text = Array.isArray(value) ? value.join("\n") : String(value);
+            document.getElementById("result").textContent = `${title}\n${text || "Няма намерени резултати."}`;
+            console.log(title, value);
+        }
+
+        function showForwards() {
+            const players = team
+                .filter(function (player) { return player.position === "forward" && player.goals >= 10; })
+                .map(function (player) { return `${player.name} – ${player.goals} гола`; });
+            display("Нападатели с поне 10 гола:", players);
+        }
+
+        function showTotalGoals() {
+            const total = team.reduce(function (sum, player) { return sum + player.goals; }, 0);
+            display("Общ брой отбелязани голове:", total);
+        }
+
+        function showPlayersWithCards() {
+            const names = team
+                .filter(function (player) { return player.yellowCards > 3; })
+                .map(function (player) { return player.name; });
+            display("Играчи с повече от 3 жълти картона:", names);
+        }
+
+        function showInjuredPlayers() {
+            const players = team
+                .filter(function (player) {
+                    return player.injuries.some(function (injury) { return injury.recovered === false; });
+                })
+                .map(function (player) { return player.name; });
+            display("Играчи, които в момента са контузени:", players);
+        }
+
+        function showGoalAverage() {
+            const averages = team
+                .map(function (player) {
+                    return {
+                        name: player.name,
+                        average: player.gamesPlayed === 0 ? 0 : player.goals / player.gamesPlayed
+                    };
+                })
+                .sort(function (a, b) { return b.average - a.average; })
+                .map(function (player) { return `${player.name} – ${player.average.toFixed(2)} гола/мач`; });
+            display("Среден брой голове на мач:", averages);
+        }
+
+        function getMissedGames(player) {
+            return player.injuries.reduce(function (sum, injury) { return sum + injury.missedGames; }, 0);
+        }
+
+        function showMostMissedGames() {
+            const player = team.reduce(function (current, candidate) {
+                return getMissedGames(candidate) > getMissedGames(current) ? candidate : current;
+            });
+            display("Играч с най-много пропуснати мачове:", `${player.name} – ${getMissedGames(player)} мача`);
+        }
+
+        function showMidfielders() {
+            const players = team
+                .filter(function (player) {
+                    return player.position === "midfielder" && player.assists >= 5 && player.redCards === 0;
+                })
+                .map(function (player) { return `${player.name} – ${player.assists} асистенции`; });
+            display("Полузащитници с поне 5 асистенции и без червен картон:", players);
+        }
+
+        function showTeamMissedGames() {
+            const total = team.reduce(function (sum, player) { return sum + getMissedGames(player); }, 0);
+            display("Общо пропуснати мачове поради контузии:", total);
+        }
+    </script>
+</body>
+</html>

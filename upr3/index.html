@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Упражнение 3 – Fetch API и localStorage</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Упражнение 3</h1>
+
+    <section class="panel">
+        <h2>Задача 1: Зареждане и филтриране</h2>
+        <button onclick="loadWithFetch()">Зареди data.json с Fetch API</button>
+        <button onclick="showAll()">Покажи всички</button>
+        <button onclick="filterByType('student')">Покажи студентите</button>
+        <button onclick="filterByType('employee')">Покажи служителите</button>
+        <div id="dataOutput">Данните все още не са заредени.</div>
+    </section>
+
+    <section class="panel">
+        <h2>Задача 2: Добавяне на обекти</h2>
+        <form id="personForm" onsubmit="event.preventDefault(); addPerson();">
+            <div class="form-grid">
+                <div class="field">
+                    <label for="typeInput">Тип</label>
+                    <select id="typeInput" onchange="updateSalaryState()">
+                        <option value="student">Студент</option>
+                        <option value="employee">Служител</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="nameInput">Име</label>
+                    <input type="text" id="nameInput" placeholder="Например Maria">
+                </div>
+                <div class="field">
+                    <label for="birthDateInput">Рождена дата</label>
+                    <input type="text" id="birthDateInput" placeholder="ДД.ММ.ГГГГ">
+                </div>
+                <div class="field">
+                    <label for="majorDeptInput">Специалност / отдел</label>
+                    <input type="text" id="majorDeptInput" placeholder="Например IIT">
+                </div>
+                <div class="field">
+                    <label for="salaryInput">Заплата (само за служител)</label>
+                    <input type="number" id="salaryInput" min="0" step="0.01" disabled>
+                </div>
+            </div>
+            <button type="submit">Добави нов запис</button>
+        </form>
+    </section>
+
+    <section class="panel">
+        <h2>Задача 3: Редактиране и localStorage</h2>
+        <button onclick="loadFromLocalStorage()">Зареди записите от localStorage</button>
+        <div id="currentRecord">Няма зареден запис.</div>
+        <div>
+            <button id="previousButton" onclick="showPrevious()" disabled>Предишен запис</button>
+            <button id="nextButton" onclick="showNext()" disabled>Следващ запис</button>
+            <button id="editButton" onclick="editCurrentPerson()" disabled>Запази редакцията</button>
+            <button id="deleteButton" class="danger" onclick="deleteCurrentPerson()" disabled>Изтрий записа</button>
+        </div>
+        <p class="muted">Избраният запис се зарежда в текстовите полета по-горе, където може да бъде редактиран.</p>
+    </section>
+
+    <div id="message">Използвайте първия бутон, за да заредите началните данни.</div>
+</body>
+</html>

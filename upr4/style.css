@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    max-width: 920px;
+    margin: 38px auto;
+    padding: 0 20px 40px;
+    color: #1f2937;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+}
+
+h1,
+h2 {
+    color: #173b66;
+}
+
+nav,
+.panel {
+    margin: 18px 0;
+    padding: 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+nav a {
+    margin-right: 18px;
+}
+
+button,
+input,
+select {
+    margin: 5px;
+    padding: 9px 11px;
+    font: inherit;
+}
+
+button {
+    border: 1px solid #1d4ed8;
+    border-radius: 5px;
+    color: white;
+    background: #2563eb;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.password-row,
+.person-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 12px;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    background: white;
+}
+
+.password-value {
+    min-width: 180px;
+    font-family: monospace;
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+
+.strength {
+    min-width: 90px;
+    padding: 7px 12px;
+    border-radius: 4px;
+    color: #111827;
+    text-align: center;
+    font-weight: bold;
+}
+
+.weak {
+    background: #ef4444;
+}
+
+.medium {
+    background: #facc15;
+}
+
+.strong {
+    color: white;
+    background: #16a34a;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 10px;
+}
+
+.form-grid label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-grid input,
+.form-grid select {
+    width: calc(100% - 10px);
+}
+
+#message {
+    min-height: 48px;
+    margin: 14px 0;
+    padding: 12px;
+    border-left: 4px solid #2563eb;
+    background: #eff6ff;
+}
+
+.error {
+    border-left-color: #dc2626 !important;
+    background: #fef2f2 !important;
+}
+
+.muted {
+    color: #64748b;
+}
+
+@media (max-width: 620px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}

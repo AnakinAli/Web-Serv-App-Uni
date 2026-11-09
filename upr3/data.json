@@ -1,0 +1,28 @@
+[
+    {
+        "type": "student",
+        "name": "Niki",
+        "birthDate": "10.10.2000",
+        "majorDept": "IIT"
+    },
+    {
+        "type": "student",
+        "name": "Viki",
+        "birthDate": "02.10.2001",
+        "majorDept": "IIT"
+    },
+    {
+        "type": "employee",
+        "name": "Ivan",
+        "birthDate": "01.10.2002",
+        "majorDept": "IIT",
+        "salary": 2000
+    },
+    {
+        "type": "employee",
+        "name": "Stefan",
+        "birthDate": "01.07.2005",
+        "majorDept": "IIT",
+        "salary": 2500
+    }
+]

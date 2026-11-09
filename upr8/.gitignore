@@ -1,0 +1,12 @@
+node_modules/
+react-app/node_modules/
+react-app/dist/
+.env
+.env.production
+.env.keys
+npm-debug.log*
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault

@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Тениска",
+      "price": 19.90,
+      "img": "tshirt.svg"
+    },
+    {
+      "id": 2,
+      "name": "Спортни обувки",
+      "price": 89.50,
+      "img": "shoes.svg"
+    },
+    {
+      "id": 3,
+      "name": "Слушалки",
+      "price": 64.20,
+      "img": "headphones.svg"
+    },
+    {
+      "id": 4,
+      "name": "Раница",
+      "price": 48.00,
+      "img": "backpack.svg"
+    }
+  ]
+}
